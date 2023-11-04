@@ -1,8 +1,8 @@
 package KnapSack;
 
 public class KnapSack {
-    public static int[] values = { 60, 100, 120 }; // Valores dos itens
-    public static int[] weights = { 10, 20, 30 }; // Pesos dos itens
+    public static int[] values = { 6, 10, 12 }; // Valores dos itens
+    public static int[] weights = { 1, 2, 3 }; // Pesos dos itens
 
     public static void main(String[] args) {
         // System.out.println(knapSackMemo(50, values.length));
@@ -34,26 +34,23 @@ public class KnapSack {
     }
 
     public static int knapSackTabulation(int cap, int n) {
-        int[][] dp = new int[values.length + 1][cap + 1];
-        return knapSackTabulation(dp, cap, 0);
-    }
 
-    public static int knapSackTabulation(int[][] dp, int cap, int n) {
-
-        for (int i = 0; i <= dp.length-1; i++) {
-            for (int j = 0; j <= cap; j++) {
+        int[][] dp = new int[n + 1][cap + 1];
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[0].length; j++) {
                 if (i == 0 || j == 0) {
                     dp[i][j] = 0;
-                } else if (weights[i] <= cap) {
-                    int pegar = dp[i - 1][j];
-                    int passar = values[i] + dp[i - 1][j - weights[i]];
+                } else if (weights[i-1] <= j) {
+                    int pegar = values[i-1] + dp[i - 1][j - weights[i-1]];
+                    int passar = dp[i - 1][j];
                     dp[i][j] = Math.max(pegar, passar);
                 } else {
                     dp[i][j] = dp[i - 1][j];
                 }
             }
         }
-        return dp[values.length][cap];
+        return dp[n][cap];
+
     }
 
     public static void fillMemo(int[][] memo) {
