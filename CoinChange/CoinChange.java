@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class CoinChange {
     public static void main(String[] args) {
-        int[] coins = {1,2,5};
+        int[] coins = {1, 2, 5};
         int amount = 11;
         System.out.println(coinChange(coins, amount));
 
@@ -18,10 +18,8 @@ public class CoinChange {
         for (int i = 1; i <= amount; i++) {
             for (int j = 0; j < coins.length; j++) {
                 if (coins[j] <= i) {
-                    int melhorAtual = dp[i];
-                    int possivelMelhor = dp[i - coins[j]] + 1;
-                    dp[i] = Math.min(melhorAtual, possivelMelhor);
-                    //basicamente, dp[i] = dp[moedaAtual - trocoAtual] +1
+                    // dp[i] = Math.min(dp[i],dp[i-coins[j]]+1);
+                    dp[i] = dp[i-coins[j]]+1;
                 }
             }
         }
