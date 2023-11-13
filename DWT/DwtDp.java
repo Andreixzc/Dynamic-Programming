@@ -28,8 +28,7 @@ public class DwtDp {
         for (int i = 1; i < len1; i++) {
             for (int j = 1; j < len2; j++) {
                 double cost = Math.abs(sequence1[i] - sequence2[j]);
-                dtwMatrix[i][j] = cost + Math.min(dtwMatrix[i - 1][j],
-                        Math.min(dtwMatrix[i][j - 1], dtwMatrix[i - 1][j - 1]));
+                dtwMatrix[i][j] = cost + Math.min(dtwMatrix[i - 1][j],Math.min(dtwMatrix[i][j - 1], dtwMatrix[i - 1][j - 1]));
             }
         }
 
